@@ -135,3 +135,14 @@
 
 2. we are using the **send()** method from the **res** parameter(short for response) to send the string "Heloo!" to client. [more information on res method](https://expressjs.com/en/api.html#res).
 
+## how to start and stop server.
+  * **npm start** to start the server
+  * **ctrl+c** and the **Y** to stop the server.
+  * we could use **[nodemon](https://www.npmjs.com/package/nodemon)** npm package to automatically restart the node application when file changes in the directory are detected.
+    - to install nodemon **npm i nodemon -g** here we are installtion the dependency as global **-g**.
+    - followed by we have to change our [package.json](package.json) **start** command to **"start":"nodemon server.js"**.
+
+    
+    ![](images/nodemon-install.JPG)
+
+
