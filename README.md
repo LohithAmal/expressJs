@@ -84,17 +84,24 @@
 
 # create project files
 
-* A json data from the zoo is stored in the folder [animal.json](data/animal.json).
+* A json data from the zoo is stored in the folder **[animal.json](data/animal.json)**.
 
-* Created root project directory [server.js](server.js).
+* Created root project directory **[server.js](server.js)**.
 
 #  Working of Express.js and why we are using it on our project
 
-* Whenever we need to retrive a data from an API, we would make a request to an endpoint and wait untol we get get the response back from server to client. Express follow the same pattern.
+* Whenever we need to retrive a data from an API, we would make a request to an endpoint and wait until we get get the response back from server to client. Express follow the same pattern.
 * Node.js application are not considered as a servers. To be considered as sever, a machine/program needs to provide some functionality to a client. in our case, we want that functionality to be accepting a request and send back a response.
 * Node.js servers require significant more code that using Express.js 
 
 # installing node and dependencies 
 
-* npm init - ask preliminary details about our project and create a own json file.
-* npm i express --save - will install express.js to our project --save will add the dependency as development dependency.
+* **npm init** - ask preliminary details about our project and create a own json file.
+* **npm i express --save** - will install express.js to our project **--save** will add the dependency as development dependency.
+
+
+#  zoo keepr starts here
+
+* we need to require the npm package express on our **[server.js](server.js)**
+* also we assign **express()** to the **app** variable so that we can chain on methods to express.js server later.
+* a **listen(port)** method is added at the end to run code on specified port.
