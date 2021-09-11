@@ -104,4 +104,34 @@
 
 * we need to require the npm package express on our **[server.js](server.js)**
 * also we assign **express()** to the **app** variable so that we can chain on methods to express.js server later.
-* a **listen(port)** method is added at the end to run code on specified port.
+* a **[listen(port)](https://expressjs.com/en/api.html#app.listen)** method is added at the end to run code on specified port.
+* to run server **npm start** on terminal.
+
+## what is a **port**?
+
+* port gives website address an exact location/destination on the host.
+* most common ports are **80 (http://)** sites and **443 (https://)**.
+* port with number **1024** and under are considered by special operating system, and often need permission to use(like running the process as an administrator).
+* to avoid the these permission restriction we choose to run ports with less restriction such as any between **1024** and **49151!** can be used, but we choose number **3000**   because it is common practice and easy to remember.
+
+## Handle request for animal
+
+* create a route that the front end can request data from.
+  ````
+  const { animals } = require('./data/animals');
+  
+  
+ **[Listenport:3001](http://localhost:3000/api/animals)**
+
+* followed by
+  ```
+  app.get('/api/animals', (req, res) => {
+  res.send('Hello!');});
+
+* there is two important things from the code above:
+1. the **get()** method require two arguments.
+    - a string that will describe the route the client will have to fetch from.
+    - is a callback function that will execute everytime that route is accesed by a **GET** request.
+
+2. we are using the **send()** method from the **res** parameter(short for response) to send the string "Heloo!" to client. [more information on res method](https://expressjs.com/en/api.html#res).
+
