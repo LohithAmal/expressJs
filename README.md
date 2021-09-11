@@ -284,5 +284,13 @@ http://localhost:3001/api/animals?personalityTraits=hungry
 http://localhost:3001/api/animals?personalityTraits=hungry&personalityTraits=zany
 
 
+# Deploy to Heroku
+
+* GitHub pages only deploy static sites made of HTML.
+* here we need to deploy a [server.js](server.js) file run as **Node.js** process.
+* So we use HEROKU
+
+* create an account on heroku [click here](https://signup.heroku.com/login) .
+* then download heroku CLI [click here](https://devcenter.heroku.com/articles/heroku-cli)
 
 
