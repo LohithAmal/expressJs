@@ -142,7 +142,147 @@
     - to install nodemon **npm i nodemon -g** here we are installtion the dependency as global **-g**.
     - followed by we have to change our [package.json](package.json) **start** command to **"start":"nodemon server.js"**.
 
-    
+
     ![](images/nodemon-install.JPG)
+
+* the **send()** method is normally used for sending short messages, but what to use for the **json** data that we have got from our project data?
+to send **JSON** just change **send** to **json**.
+```` 
+app.get('/api/animals', (req, res) => {
+  res.json(animals);
+});
+````
+
+*  **[Listenport:3001 after](http://localhost:3000/api/animals)** you see the some thing like this:
+
+
+  ![](images/json-data.JPG)
+
+
+* the JSON data appears, we have a working server.
+
+* we use **filterByQuery()** method to filter the data we need from the big data JSON.
+
+````
+app.get('/api/animals', (req, res) => {
+  let results = animals;
+  console.log(req.query)
+  res.json(results);
+});
+````
+
+http://localhost:3001/api/animals?name=Erica
+
+* You see 
+
+
+![](images/json-data1.JPG)
+
+* it has taken **query parameter** and turned into **JSON**
+* whatever query paarmeter you use on URL will become JSON, 
+    - example: **?a=111&b=222&c=333** will become,
+      ````
+      {
+        a: "111",
+        b: "222",
+        c: "333"
+      }
+      ````
+
+* **IMPORTANT** if we add same query name with different values, it will become **array** in **JSON**
+    - example: **?a=111&b=222&b=333** will become,
+      ````
+      {
+        a: "111",
+        b: ["222","333"]
+        
+      }
+      ````
+
+* now we add filter functionality inside the **.get()** callback, we are going to break it out inot its own function. This will make the code look cleaner.
+* Above the **.get()**, create a new function called **filterByQuery()** by adding following code,
+
+````
+function filterByQuery(query, animalsArray) {
+  let filteredResults = animalsArray;
+  if (query.diet) {
+    filteredResults = filteredResults.filter(animal => animal.diet === query.diet);
+  }
+  if (query.species) {
+    filteredResults = filteredResults.filter(animal => animal.species === query.species);
+  }
+  if (query.name) {
+    filteredResults = filteredResults.filter(animal => animal.name === query.name);
+  }
+  return filteredResults;
+}
+````
+
+* this function will take a request query **res.query** as an argument and filter throught the animal accordigily.
+* we can now call the **filteredByQuery()** in the **app.get()** callback as shown in the following code:
+
+````
+app.get('/api/animals', (req, res) => {
+  let results = animals;
+  if (req.query) {
+    results = filterByQuery(req.query, results);
+  }
+  res.json(results);
+});
+
+````
+* now we run the server with this query http://localhost:3001/api/animals?name=Erica we see,
+
+![](images/json-data2.JPG) 
+
+* Now this code is capable of quering through strings but we need to update code to function for the arrays such as **personality traits** data.
+
+````
+function filterByQuery(query, animalsArray) {
+  let personalityTraitsArray = [];
+  // Note that we save the animalsArray as filteredResults here:
+  let filteredResults = animalsArray;
+  if (query.personalityTraits) {
+    // Save personalityTraits as a dedicated array.
+    // If personalityTraits is a string, place it into a new array and save.
+    if (typeof query.personalityTraits === 'string') {
+      personalityTraitsArray = [query.personalityTraits];
+    } else {
+      personalityTraitsArray = query.personalityTraits;
+    }
+    // Loop through each trait in the personalityTraits array:
+    personalityTraitsArray.forEach(trait => {
+      // Check the trait against each animal in the filteredResults array.
+      // Remember, it is initially a copy of the animalsArray,
+      // but here we're updating it for each trait in the .forEach() loop.
+      // For each trait being targeted by the filter, the filteredResults
+      // array will then contain only the entries that contain the trait,
+      // so at the end we'll have an array of animals that have every one 
+      // of the traits when the .forEach() loop is finished.
+      filteredResults = filteredResults.filter(
+        animal => animal.personalityTraits.indexOf(trait) !== -1
+      );
+    });
+  }
+  if (query.diet) {
+    filteredResults = filteredResults.filter(animal => animal.diet === query.diet);
+  }
+  if (query.species) {
+    filteredResults = filteredResults.filter(animal => animal.species === query.species);
+  }
+  if (query.name) {
+    filteredResults = filteredResults.filter(animal => animal.name === query.name);
+  }
+  // return the filtered results:
+  return filteredResults;
+}
+
+````
+http://localhost:3001/api/animals?personalityTraits=hungry
+
+
+http://localhost:3001/api/animals?personalityTraits=hungry&personalityTraits=zany
+
+
 
 
