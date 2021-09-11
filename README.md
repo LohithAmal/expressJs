@@ -55,5 +55,30 @@
 
   ![](images/steps.JPG)
 
-  
+  # start project 
+
+  ## add github issue
+
+  ## issue 1 - Create a web server
+
+  * As a user, I can request for a list of all animal data
+
+  * As a user, I can request data for just one animal based on its id value
+
+  * As a user, I want to be able to do this from anywhere and not just my computer
+
+
+ ## issue 2 - Allow user creation of data
+
+ *  As a user, I want to be able to add a new animal to the catalog
+
+## issue 3 - Implement Front End
+
+* As a user, I want to be able to view data from the server in a front-end web application
+
+* As a user, I want to create new data by submitting an HTML form
+
+## issue 4 - Incorporate a seperate dataset
+
+* As a user, I want to be able to access and create different types of data stored on the server
 
