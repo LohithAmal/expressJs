@@ -1,0 +1,30 @@
+{
+  "name": "express.js",
+  "version": "1.0.0",
+  "description": "this is zoo kepr application build with express.js",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LohithAmal/expressJs.git"
+  },
+  "keywords": [
+    "express.js",
+    "javascript",
+    "node.js",
+    "insominia",
+    "heroku"
+  ],
+  "author": "Amal Lohith",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LohithAmal/expressJs/issues"
+  },
+  "homepage": "https://github.com/LohithAmal/expressJs#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
