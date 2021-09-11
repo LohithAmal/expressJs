@@ -292,5 +292,29 @@ http://localhost:3001/api/animals?personalityTraits=hungry&personalityTraits=zan
 
 * create an account on heroku [click here](https://signup.heroku.com/login) .
 * then download heroku CLI [click here](https://devcenter.heroku.com/articles/heroku-cli)
+* recommend to restart system after CLI install.
+
+* create a heroku application type **heroku create** on terminal
+* can specify the file directory(application name) by **heroku create <app name>**
+* since heroku dont work or take file from sub braches of git, so we have to push our working files to heroku main.
+* we can add files to heroku by:
+  ````
+  git add -A
+  git commit -m "Add Heroku"
+  git push heroku feature/MVP: main 
+
+  ````
+
+* heroku will provide a link of deployed application after the push.
+* before we click link we have to specify the port as heroku will only deploy on port 80.
+* to specify port by heroku and to use it if available we have to write to mention code;
+````
+const PORT =  process.env.PORT || 30001;
+<!-- which says use the port as the port mentioned by heroku ie. 80 if not available use 3001 port -->
+
+app.listen(PORT, =>{
+  console.log( `API server now on port ${PORT}`);
+})
+````
 
 
