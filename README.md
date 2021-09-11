@@ -316,5 +316,52 @@ app.listen(PORT, =>{
   console.log( `API server now on port ${PORT}`);
 })
 ````
+# Difference between development(local) and production(Heroku) enviroment
+
+![](images/development-env.JPG)
+* a **development environment** is where we:
+  - code new feature
+  - fix bugs
+  - make all our code updates
+* when we say development environment we are referring to what stored on our local machine.
+* **production environment** where our live application lives
+* example such as;
+  - github pages
+  - heroku
+  - microsoft azure
+  - aws
+* a **production environment** is where:
+  - Hosts the update and tested version of code.
+  - accessible to the users
+  - every code is ensured functionality at development environment before movibg to production evironment.
+* production environment have its own database and it wouldn't be connected or affected by our local/development database. 
+
+| Local development environment      | production development environment     |
+| :------------- | :----------: 
+|  New Code | cloud-hosted   | 
+| Features  | seperate from your local environment |
+|  BUg fixes |
+
+* most companies have a additional environment before production after development ie. staging environment
+* staging environment
+
+  ![](images/staging.JPG)
+
+
+  - Replica of the production environment
+  - helps test changes in the local env.
+  - Provides additional layer of QA.
+
+
+* **[req.params](https://www.geeksforgeeks.org/express-js-req-params-property/)**- 
+params. An object containing parameter values parsed from the URL path. For example if you have the route /user/:name , then the "name" from the URL path wil be available as req.params.name .
+
+* **[req.param.ID](https://www.geeksforgeeks.org/express-js-req-params-property/)** - The req. params property is an object containing properties mapped to the named route “parameters”. For example, if you have the route /student/:id, then the “id” property is available as req.params.id. This object defaults to {}.
+
+
+| req.query      | req.param  |
+| :------------- | :----------: 
+|  is multifaceted | single property   | 
+| often combaning multiple parameters | often intended to retrive a single record |
 
 
