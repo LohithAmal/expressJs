@@ -361,7 +361,63 @@ params. An object containing parameter values parsed from the URL path. For exam
 
 | req.query      | req.param  |
 | :------------- | :----------: 
-|  is multifaceted | single property   | 
-| often combaning multiple parameters | often intended to retrive a single record |
+| * is multifaceted | * single property   | 
+| * often combaning multiple parameters | * often intended to retrive a single record |
+
+ # on the [server.js](server.js) so far we have coded functionality that retrives animal from the Zoo catalog(from json).
+ # next we work on code that let zoo to add animals to the catalog.
+
+* this section objective
+  - create a different type of API endpoitn to accept incoming (often POST) data from the client request.
+  - implement functionality called middleware so our server can understand the type of data we are looking to post.
+  - use a tool called **[insomnia Core](https://insomnia.rest/products/insomnia)** to test POST request whilw we wait for a finished frond end.
+
+![](images/second-part.JPG)
+
+* there are commonly two ways by which datas store onto the server.
+    - the developer team write the ddata manually by server code.
+    - users of the app populate the server with data by sending data from the client side of the applicayion to the  server.
+
+# commonly used http methods
+
+* **GET** : Used to fetch data from server
+* **POST** : Create a content
+* **PUT** : Update a content
+* **DELETE** : Delete a content
+
+ ### **note** : Accepting data from a client can be risky. While we expect to receive the type of data we asked for, there is nothing stopping a user from sending incorrect or malicious data to our server. For this reason, there are validation libraries that ensure (on the server side) that the data meets certain criteria. It is also why most APIs require that the user must be authenticated to make a POST request, as an access token provided by an authenticated user will let the server confirm that the person making the request is allowed to.
+  ![](images/middle-man.JPG)
+
+  # Test routes in Insomnia core
+
+  * download [insomnia core](https://insomnia.rest/) 
+  * [introduction](https://docs.insomnia.rest/insomnia/get-started) to insomnia.
+  * insomnia [docs](https://docs.insomnia.rest/).
+
+# Add middleware so the application can accept POST data
+
+* when a client commmunicate to the server to trasfer data. client to server (POST) or server to client (GET), communication happen over HTTP.
+* HTTP itself dont have the capability to understand the data type we send.
+* when we asking for a JSON data using GET request, our server code use **res.json()** to provide context to client receiving data, so it knows what type of data to interpret the response as. 
+
+* **middleware functions** allow us to keep our route endpoint callback functions more readable while letting us reuse functionality across routes to keep DRY code.
+
+* **express.urlencoded({extended:true})** is method that takes incoming **POST** data and converts it to key/value pairing that can be accesed in **req.body** object.
+* the **extended:true** incase of sub-array data this method will inform our server to look as deep into our POST data to parse all the data correctly. 
+* the **express.json()** mehod takes the incoming POST data in the form of JSON and parse into the **req.body** object.
+* this is important and both the above middleware function need to be setup everytime you create a server that's looking accept POST data.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

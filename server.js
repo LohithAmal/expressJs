@@ -1,11 +1,13 @@
 // we need to require npm packages here is the express.js is been required/called from npm and added to variable express. 
-const http = require('http');
+
 const express = require('express');
-const app = express();
+
 const {animals} = require('./data/animal.json');
 
 const PORT = process.env.PORT || 3001;
-
+const app = express();
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 function filterByQuery(query, animalsArray) {
   let personalityTraitsArray = [];
   // Note that we save the animalsArray as filteredResults here:
@@ -46,7 +48,7 @@ function filterByQuery(query, animalsArray) {
 }
 
 function findById(id, animalArray){
-  const result = animalArray.filter(animal => animal.id ===id)[0];
+  const result = animalArray.filter(animal => animal.id === id)[0];
   return result;
 }
 
@@ -60,11 +62,18 @@ app.get('/api/animals', (req,res)=> {
 
 app.get('/api/animals/: id', (req,res)=> {
   const result = findById(req.params.id, animals);
-  if(result){res.json(result);
-  }else{
+  if(result){9
+    res.json(result);
+  } else {
     res.send(404);
   } 
-})
+});
+
+app.post('/api/animals',(req, res)=> {
+  // req.body where our incoming content will be
+  console.log(req.body);
+  res.json(req.body);
+});
 
 app.listen(PORT, () => {
   console.log(`API server now on port ${PORT}!`);
