@@ -1,5 +1,6 @@
 // we need to require npm packages here is the express.js is been required/called from npm and added to variable express. 
-
+const fs = require('fs');
+const path = require('path');
 const express = require('express');
 
 const {animals} = require('./data/animal.json');
@@ -59,7 +60,50 @@ app.get('/api/animals', (req,res)=> {
   }
   res.json(results);
 });
+// vALIDATE DATA FUNCTION
+function validateAnimal(animal){
+  if(!animal.name || typeof animal.name !== 'string'){
+    return false;
+  }
+  if(!animal.species || typeof animal.species !== 'string'){
+    return false;
+  }
+  if(!animal.diet || typeof animal.diet  !== 'string'){
+    return false;
+  }
+  if (!animal.personalityTraits ||  !Array.isArray(animal.personalityTraits)){
+    return false;
+  }
+  return true;
+}
 
+// create animal function
+
+function createNewAnimal(body, animalsArray){
+ 
+  // our function main code
+    const animal = body;
+    animalsArray.push(animal);
+    fs.writeFileSync(
+      path.join(__dirname, './data/animal.json'),
+      JSON.stringify({animals: animalsArray}, null, 2)
+    );
+  // return finished code to post route for response
+
+  return animal;
+}
+app.post('/api/animals',(req,res)=>{
+  // set the id based on what rthe next index of array will be
+  req.body.id= animals.length.toString();
+// if any data in req.body is incorrect, send 400 error back
+if(!validateAnimal(req.body)){
+  res.status(400).send('the animal is not properly formatted.');
+}else{
+  const animal = createNewAnimal(req.body, animals);
+
+  res.json(animal);
+} 
+});
 app.get('/api/animals/: id', (req,res)=> {
   const result = findById(req.params.id, animals);
   if(result){9

@@ -407,10 +407,14 @@ params. An object containing parameter values parsed from the URL path. For exam
 * the **express.json()** mehod takes the incoming POST data in the form of JSON and parse into the **req.body** object.
 * this is important and both the above middleware function need to be setup everytime you create a server that's looking accept POST data.
 
+# add a function to handle animal creation
+
+* here we are creating a seperate function to handle taking the data from **req.body** and adding it to our **animal.json** file.
+
+**[path](https://nodejs.org/docs/latest-v12.x/api/path.html)** another module build in Node.js API that provide utilities for working with file and directory paths. it ultimately make working with our file system a little more predictable.
 
 
-
-
+* **res.status().send()** is a response method to replay a message to client 
 
 
 
